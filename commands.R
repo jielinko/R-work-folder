@@ -138,6 +138,82 @@ head(airquality)
 g <- complete.cases(airquality)
 airquality[g,][1:10,]
 
+# vectorized
+
+x <- 1:5
+y <- 6:10
+
+x+y
+x*y
+x/y
+
+x <- matrix(1:4,nrow=2,ncol=2)
+y <- matrix(rep(2,4),nrow=2,ncol=2)
+x*y
+x/y
+
+
+#lapply
+str(lapply)
+
+x <- list(a=1:10,b=c(11,21,31,41,51))
+lapply(x,mean)
+
+x <- 1:4
+lapply(x,runif)
+lapply(x,runif,min=0,max=100)
+
+x <- list(a=matrix(1:6,2,3),b=matrix(4:7,2,2))
+lapply(x,function(m) m[1,])
+
+#sapply
+
+x <- list(a=1:10,b=c(11,21,31,41,51))
+lapply(x,mean)
+sapply(x,mean)
+
+class(sapply(x,mean))
+
+#apply
+
+x <- matrix(1:16,4,4)
+
+apply(x,2,mean)
+apply(x,2,sum)
+
+apply(x,1,sum)
+apply(x,1,mean)
+
+rowSums(x)
+rowMeans(x)
+colSums(x)
+colMeans(x)
+
+x <- matrix(rnorm(100),10,10)
+apply(x,1,quantile,probs=c(0.25,0.75))
+
+x <- array(rnorm(2*3*4),c(2,3,4))
+apply(x,c(1,2),mean)
+apply(x,c(1,3),mean)
+apply(x,c(2,3),mean)
+
+# mapply
+
+list(rep(1,4),rep(2,3),rep(3,2),rep(4,1))
+
+mapply(rep,1:4,4:1)
+
+s <- function(n,mean,std){
+  rnorm(n,mean,std)
+}
+
+s(4,0,1)
+
+mapply(s,1:5,5:1,2)
+list(s(1,5,2),s(2,4,2),s(3,3,2),s(4,2,2),s(5,1,2))
+
+
+
 #function
 
 fun1 <- function (a,b){ return(a+b) } 
