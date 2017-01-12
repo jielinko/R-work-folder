@@ -1,3 +1,85 @@
+# 一,get started
+
+x <- 3
+y <- 4
+z <- sum(x + y)
+help(sum)
+?sum # these two inquery the function info
+args(sum) # inquery the arguments of the function 
+example(sum) # got the using sample of the function
+# after input the name of one function,press tab to check the relative functions
+
+# download Velocity from http://velocity.silverlakesoftware.com
+
+# 安裝 package 有以下兩種方式：
+  # 1,透過右下角 Packages -> Install Packages 安裝套件
+  # 2,在 console 輸入指令安裝
+
+install.packages("ggplot2") # 下載 ggplot2 套件
+
+# 載入 package 有以下兩種方式：
+  # 1,透過右下角 Package，將要載入的 package 打勾即可。
+  # 2,在 console 輸入指令載入
+
+library(ggplot2) # ggplot2 一個畫圖套件。
+require(ggplot2) 
+
+# library 與 require 都是載入 package，但是最大的差別在於，library 如果是載入的 package 不存在，是會發生 error 程式停止，
+# 但是 require 卻不會。
+
+
+# 二,基本运算
+
+# R 的基本資料屬性包含以下五種，可用 class 函數判斷資料屬性
+  # 1,character：文字字串，用 "" 包起來，ex："test"
+  # 2,numeric：實數
+  # 3,integer：整數
+  # 4,complex：複數
+  # 5,logical：True 或 False
+
+class("test")
+
+class(10.10)
+
+class(10)
+
+class(as.integer(3)) # 因為 R 計算上是都是以雙倍精確度來計算，所以必須指定為 integer，不然都會被當成 numeric 看待。
+
+as.integer(3.1)
+class(as.integer(3.1)) # as.integer 可以將不是整數的數值變成整數
+
+as.integer(T)
+class(as.integer(T)) # as.integer(T) = 1
+as.integer(F)
+class(as.integer(T)) # as.integer(F) = 0
+
+class(2+2i)
+
+class(TRUE) ## 注意都要大寫，不可寫 True，但可以簡化成 T
+class(T)
+
+# 註：
+  # 1,as.integer 切記不可以傳 character 進去，因為會產生 NA，如果傳 complex 進去，則會將虛數的部份則會自動捨棄。
+  # 2,可以用 is.integer(x) 判斷是否為整數。
+  # 3,complex 也有跟 integer 類似的函數，as.complex 與 is.complex。
+  # 4,logical 也有跟 integer 類似的函數，as.logical 與 is.logical
+
+as.integer("test")
+as.integer(2+2i)
+is.integer(2)
+is.integer(as.integer(2))
+
+as.complex(2)
+is.complex(2)
+is.complex(as.complex(2))
+
+as.logical(1)
+as.logical(2)
+
+
+
+
+
 #vector
 
 x <- vector("character",length = 10)
@@ -246,17 +328,17 @@ equation2 <- function(a,b,c){
     
     if(b^2-4*a*c=0) {
       
-     root = 0-b/2*a;
-     
-     return (root)
-     
+      root = 0-b/2*a;
+      
+      return (root)
+      
     } 
   
   else {
     
     root1 = 0-b/2*a + sqrt(complex ((b*b-4*a*c)/2*a));
     root2 = 0-b/2*a + sqrt(complex ((b*b-4*a*c)/2*a));
-  
+    
     return (root1)
     
   }
