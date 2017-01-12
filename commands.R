@@ -7,35 +7,35 @@ help(sum)
 ?sum # these two inquery the function info
 args(sum) # inquery the arguments of the function 
 example(sum) # got the using sample of the function
-# after input the name of one function,press tab to check the relative functions
+  # after input the name of one function,press tab to check the relative functions
 
-# download Velocity from http://velocity.silverlakesoftware.com
+  # download Velocity from http://velocity.silverlakesoftware.com
 
-# 安裝 package 有以下兩種方式：
-  # 1,透過右下角 Packages -> Install Packages 安裝套件
-  # 2,在 console 輸入指令安裝
+  # 安裝 package 有以下兩種方式：
+    # 1,透過右下角 Packages -> Install Packages 安裝套件
+    # 2,在 console 輸入指令安裝
 
 install.packages("ggplot2") # 下載 ggplot2 套件
 
-# 載入 package 有以下兩種方式：
-  # 1,透過右下角 Package，將要載入的 package 打勾即可。
-  # 2,在 console 輸入指令載入
+  # 載入 package 有以下兩種方式：
+    # 1,透過右下角 Package，將要載入的 package 打勾即可。
+    # 2,在 console 輸入指令載入
 
 library(ggplot2) # ggplot2 一個畫圖套件。
 require(ggplot2) 
 
-# library 與 require 都是載入 package，但是最大的差別在於，library 如果是載入的 package 不存在，是會發生 error 程式停止，
-# 但是 require 卻不會。
+  # library 與 require 都是載入 package，但是最大的差別在於，library 如果是載入的 package 不存在，是會發生 error 程式停止，
+  # 但是 require 卻不會。
 
 
 # 二,基本运算
 
-# R 的基本資料屬性包含以下五種，可用 class 函數判斷資料屬性
-  # 1,character：文字字串，用 "" 包起來，ex："test"
-  # 2,numeric：實數
-  # 3,integer：整數
-  # 4,complex：複數
-  # 5,logical：True 或 False
+  # R 的基本資料屬性包含以下五種，可用 class 函數判斷資料屬性
+    # 1,character：文字字串，用 "" 包起來，ex："test"
+    # 2,numeric：實數
+    # 3,integer：整數
+    # 4,complex：複數
+    # 5,logical：True 或 False
 
 class("test")
 
@@ -58,11 +58,11 @@ class(2+2i)
 class(TRUE) ## 注意都要大寫，不可寫 True，但可以簡化成 T
 class(T)
 
-# 註：
-  # 1,as.integer 切記不可以傳 character 進去，因為會產生 NA，如果傳 complex 進去，則會將虛數的部份則會自動捨棄。
-  # 2,可以用 is.integer(x) 判斷是否為整數。
-  # 3,complex 也有跟 integer 類似的函數，as.complex 與 is.complex。
-  # 4,logical 也有跟 integer 類似的函數，as.logical 與 is.logical
+  # 註：
+    # 1,as.integer 切記不可以傳 character 進去，因為會產生 NA，如果傳 complex 進去，則會將虛數的部份則會自動捨棄。
+    # 2,可以用 is.integer(x) 判斷是否為整數。
+    # 3,complex 也有跟 integer 類似的函數，as.complex 與 is.complex。
+    # 4,logical 也有跟 integer 類似的函數，as.logical 與 is.logical
 
 as.integer("test")
 as.integer(2+2i)
@@ -75,32 +75,327 @@ is.complex(as.complex(2))
 
 as.logical(1)
 as.logical(2)
+is.logical(1)
+is.logical(F)
 
+  #             character numeric integer complex logical
+   # as.integer      X       Ｏ     Ｏ       Ｏ      Ｏ
+   # is.integer      F       F      T         F       F
+  
+  
+  # 常见运算
+   # 加减乘除
+1+2
+1-2
+1*2
+1/2
 
+  # 次方,平方根,商数与余数
+2^3 # 2 的 3 次方
+2**3 # 2 的 3 次方
+sqrt(4) # 4 的平方根
+27^(1/3) # 27 的立方根
 
+11 %/% 5 #11 除以 5 的得的熵
+12 %% 5 #11 除以 5 的余数
 
+  # sign：判斷是正、負數或 0
 
-#vector
+sign(10)
+sign(0)
+sign(-10)
+
+  # abs：取絕對值
+
+abs(10)
+
+abs(0)
+
+abs(-10)
+
+  # log
+
+log(10) # log 以 e 为底
+log1p(9) # log(x) = log1p(x-1)
+
+log(10,2) # 指定log 以 2 为底
+log2(10) # log2 代表以 2 為底
+log10(10) # log10 代表以 10 為底
+
+  # exp 高等数学里以自然常数e为底的指数函数
+
+exp(10) 
+expm1(10) # expm1(x) = exp(x) - 1
+
+# 三,对象和属性
+
+  # 1. 变量
+  # 2. 向量
+  # 3. 矩陣
+  # 4. 因子
+  # 5. 串列
+  # 6. 資料框架
+  # 7. 時間數列
+  # 8. 指標
+
+# 3.1 变量
+
+x <- 1
+y <- 2
+x+y
+
+x1 <- x2 <- 1
+x1 + x2
+
+  # exists 函數檢查 重复给变量赋值的问题
+
+x = 1
+x = 1.3
+x = 1 + 2i
+x = "test"
+x = FALSE
+x = 10
+exists("x")
+
+  # NA 與 NULL
+   # NA 代表是個空物件，已經有物件但是裡面沒東西，NULL 則是根本沒有任何東西
+
+# 3.2 向量(vector)
+  # 利用 c(...) 建立向量，但切記向量元素必須是同個資料屬性。
 
 x <- vector("character",length = 10)
-
 x1 <- 1:4
-
 x2 <- c(1,2,3,4)
-
 x3 <- c(TRUE,10,"a")
-
 x4 <- c("a","b","c")
-
 as.numeric(x4)
 
-#matrix & array
+c(1,2,3)
+c(1,TRUE,"test")  # 全部都變成 character
+c(1.1,TRUE,"test") # 全部都變成 character
+c(1+2i, TRUE, "test") # 全部都變成 character
+c(1,TRUE) # 全部自動轉成 integer
+c(1.1,TRUE) # 全部自動轉成 numeric
+c(1+2i, TRUE) # 全部自動轉成 complex
+c(1, 1.1) # 全部自動轉成 numeric
+c(1, 1.1, 1+2i) # 全部自動轉成 complex
+
+  # 註：
+    # 經由以上比較後，可以得到當放入的形態不同時，會被轉成同一形態，且可以
+    # 每個形態的強弱不同，以下是強到弱排序。
+    # character > complex > numeric > integer > logical
+  
+  # 取向量元素的两种方式
+    # 1,指标
+    # 2,元素名称
+  
+  # 另外可以搭配 [] 或 [[]]，這樣分別會回傳向量元素的所有資訊或向量元素的數值，
+  
+  # 總共可以分成以下四種狀況：
+    # 1, x[i]：回傳向量元素所有資訊
+    # 2, x[[i]]：只回傳向量元素的值
+    # 3, x[元素名稱]：回傳向量元素所有資訊
+    # 4, x[[元素名稱]}：只回傳向量元素的值
+
+x <- c(joe=12, vicky=14, bob=17)
+
+x[]
+x[1]
+x[[1]]
+x["joe"]
+x[["joe"]]
+
+x[1:2] # 一次取多个向量元素
+
+  # c(...) 类似的函数x:y, seq 与 rep
+    #1,x:y : 回传 x 到 y 的整数向量,所以 x 与 y 都是整数
+    #2,seq(s, e, by)：產生一個等差級數的向量。
+        # s 是初始值
+        # e 是結束值
+        # by 是遞增值，預設是 1
+    #3,rep(x, times, each)：產生一個重覆循環的向量。
+        # x 是需重覆循環的數值
+        # times 是重覆循環次數
+        # each 是 x 內元素重覆的次數
+1:5
+seq(1:5)
+seq(1,5,0.3) # 就算沒有剛好加到跟結束值一樣也沒關係
+rep(c(1,2,3),times=3,each=2)
+rep(1:4,times=3,each=2)
+
+  # 基本相關函數
+    # 向量加減乘除
+    # length：計算向量中的元素個數。
+    # sum：將向量所有元素加總。
+    # prod：將向量所有元素相乘。
+    # cumsum：回傳元素累加向量。
+    # cumprod：回傳元素累乘向量。
+    # sort：將向量元素排列，產生排序過的向量。
+    # rank：回傳各向量元素的排序值。
+
+c(3,4,2) + c(3,4,2)
+c(3,4,2) - c(3,4,2)
+c(3,4,2) * c(3,4,2)
+c(3,4,2) / c(3,4,2)
+
+length(c(3,4,2))
+sum(c(3,4,2))
+prod(c(3,4,2))
+cumsum(c(3,4,2))
+cumprod(c(3,4,2))
+sort(c(3,4,2))
+rank(c(3,4,2))
+
+  # 向量长度不同的加减乘除
+
+    # 加和减 : 如果長度較長的向量長度是較短的倍數的話是可以相加或相減的。
+c(1,2) + c(1,2,3)  
+c(1,2) + c(1,2,3,4)  
+
+    # 乘跟除 : 與加跟減狀況一致，只是當長度不是倍數時會有結果但也會警告。
+c(1,2) * c(1,2,3)
+c(1,2) * c(1,2,3,4)
+
+# 3.3 阵列 & array
+  # 3.3.1 利用 rbind、cbind 與 array 函數建立陣列
+
+  # 陣列可視為多維度的向量變數，跟向量一樣，所有陣列元素的資料屬性必須一致。
+
+x <- c(1,2,3)
+y <- c(4,5,6)
+
+rbind(x,y) # rbind 是通过 row(横) 合并
+cbind(x,y) # cbind 是通过 column(列) 合并
+
+array(x,c(1,3)) # c(1,3) 代表产生 1 * 3 列阵列
+array(x,c(2,3)) # c(2,3) 代表产生 2 * 3 列阵列
+array(x,c(3,3)) # c(3,3) 代表产生 3 * 3 列阵列
+
+  # 透過指標提取資料
+    # 陣列與向量相同，可以透過指標或名稱選取陣列的元素。
+x <- c(1,2,3)
+y <- c(4,5,6)
+z <- rbind(x,y)
+z[,1] # 选取第一列(column 直)
+z[1,] # 选取第一行(row 横)
+z[1,1:2] # 选取第一行第一到第二列
+
+  # 基本相关函数
+    # 陣列加減乘除
+    # length：計算陣列中的所有元素個數。
+    # dim：列出維度資訊
+    # ncol、nrow：計算(column、直) 或 (row、橫) 個數。
+    # aperm：將陣列轉置
+x <- c(1,2,3)
+y <- c(4,5,6)
+z <- rbind(x,y)
+
+z + z
+z - 2 * z
+z * z 
+z / z
+
+length(z)
+dim(z) # 前者是 row，後者是 column
+ncol(z)
+nrow(z)
+aperm(z) # 等同是從 rbind 轉成 cbind
+
+  # 3.3.2 矩阵：利用 matrix 建立矩陣
+    # 當陣列是 2 維的狀況就是所謂的矩陣，可以利用 matix 產生矩陣，也可以用之前產
+    # 生陣列的方法實作。
 
 x <- matrix(1:6, nrow =3 ,ncol = 2)
+attributes(x) # 查看维度信息
+matrix(c(1:6), nrow = 3, ncol = 2) # 預設是按照 column 填入資料
+matrix(c(1:6), nrow = 3, ncol = 2, byrow = TRUE) # 可以更改成按照 row 填入資料
 
-attributes(x)
+  # 透過指標提取資料
+    # 矩陣跟陣列一樣，還是可以透過指標選取矩陣的部份元素。
+x <- c(1,2,3)
+y <- c(4,5,6)
+z <- rbind(x,y)
 
-y2 <- matrix(1:6,nrow=2,ncol=3)
+z[,1]
+z[1,]
+z[1,1:2]
+
+  # 基本相关函数
+    # t(x)：將矩陣轉置。
+    # %*%：矩陣相乘。
+    # diag：產生一個對角矩陣，或回傳矩陣的對角線向量
+    # det：計算矩陣行列式值，一定是要對稱矩陣。
+    # solve：傳回矩陣的反矩陣，非常適合解線性方程式。
+    # eigen：計算矩陣的特徵向量與特徵值。
+    # rownames：修改或查詢 row 名稱。
+    # colnames：修改或查詢 column 名稱。
+
+x <- c(1,2,3)
+y <- c(4,5,6)
+z <- rbind(x,y)
+
+t(z)
+z %*% z # 矩陣相乘要符合前者 column 維度 = 後者 row 維度，如果沒有會發生錯誤！
+v <- z %*% t(z)
+w <- diag(c(1,2,3)) # 傳入向量回傳一個對角矩陣
+diag(w) # 傳入矩陣回傳矩陣對角線向量
+det(v) # 一定要對稱矩陣才可以計算
+solve(v) 
+
+b = c(1,1)  # 解 Ax = b，求出 x ; 向量 A:變數 v,b:變數 b
+solve(v,b) 
+
+u = matrix(1:9, nrow = 3, ncol = 3)
+eigen(u) # 特征值
+
+rownames(z)
+rownames(z) <- c("第一行","第二行")
+rownames(z)
+
+colnames(z)
+colnames(z) <- c("第一列","第二列","第三列")
+colnames(z)
+
+ # 3.4 因子(factor)
+
+    # 利用 factor 建立因子
+    # 因子有點像經過分級之後的向量，因子大多可以用在統計上的迴歸分析與實際設計等。
+
+x <- c(1,2,4,3,1,2,3,4,1)
+factor(x)
+
+factor(x, labels = c("一", "二", "三", "四")) # 可自訂 Level 的名稱。
+factor(x, ordered = TRUE) # ordered 代表可做排序
+factor(c(1, 2, 1, NA, 2), exclude = NA) # 可利用 exclude 排除特定資料。
+factor(c(1, 2, 1, NA, 2), exclude = 2)
+factor(c(1, 2, 1, NA, 2), exclude = NULL) # 不排除任何資料。
+factor(c(1, 2, 1, NA, 2)) #默认排除NA
+
+    # 透過指標提取資料
+
+x[1] # [] 與 [[]] 結果一致，因為因子只有值沒有其他相關資料。
+x[[1]]
+x[1:2] # 指标可以使用向量
+x[c(1,3,5)] # X 的第一,三,五位分别为1,4,1
+
+    # 基本相关函数
+      # is.factor：判斷是否為因子。
+      # as.factor：將變數轉為因子。
+      # is.ordered：判斷是否為排序過的因子。
+      # as.ordered：將因子排序。
+      # which：找出符合條件的指標。
+
+x <- c(1,2,4,3,1,2,3,4,1)
+
+as.factor(x)
+is.factor(x)
+is.factor(as.factor(x))
+is.ordered(factor(x,ordered = TRUE))
+is.ordered(factor(x,ordered = FALSE))
+as.ordered(factor(x))
+which(x == 1)
+
+
 
 #list
 
