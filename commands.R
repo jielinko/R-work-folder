@@ -395,15 +395,72 @@ is.ordered(factor(x,ordered = FALSE))
 as.ordered(factor(x))
 which(x == 1)
 
+  # 3.5 列表(list)
+    # 利用 list 建立列表
+    # 列表跟向量很相似，但最大的不同在於列表可以包含不同資料屬性的資料。
 
-
-#list
-
+x <- list(a = 1, b = TRUE, c = "test", d = c(1,2,3))
 l <- list("a",2,10L,3+4i,TRUE)
-
 l2 <- list(a=1,b=2,c=3)
-
 l3 <- list(c(1,2,3),c(4,5,6,7))
+    # 透過指標與名稱提取資料
+x <- list(a = 1, b = TRUE, c = "test", d = c(1,2,3))
+x[1]
+x[[1]]
+x$b # 利用 $ 加上名称提取资料
+x[[4]][2] # x[[4]] 取出第四個值，因為第四個值是向量，所以可以在取一次指標，取出向量的元素值。
+  
+    # 基本相關函數
+      # 1,as.list:建立列表
+      # 2,is.list:判断是否为列表
+      # 3,attributes:查看所有元素的名称,names也有相同功能.
+x <- list(a = 1, b = TRUE, c = "test", d = c(1,2,3))
+as.list(c(1,2,3))
+is.list(x)
+attributes(x)
+names(x)
+
+  # 3.6 资料框架(data.frame)
+      # 利用 data.frame 建立資料框架
+      # 資料框架類似資料表，常當作大量資料集，例如：匯入外部檔或讀取資料庫資料等。
+name <- c("Joe","Bob","Vicky")
+age <- c("28","26","34")
+gender <- c("Male","Male","Female")
+data <- data.frame(name,age,gender)
+view(data) #自动点选data变数就会开启资料的画面
+      
+      # 透過指標與名稱提取資料
+        # 資料框架的提取資料方法跟矩陣或陣列的都很類似。
+data 
+data[1,]
+data[,1]
+data[1,1]
+data[,"name"]
+data[1:2,"name"]
+data$name[1:2]
+
+    # 基本相關函數
+      # head : 取得資料框架前六项資料(預設是 6)。
+      # names : 修改或查詢 column 名稱。
+      # colnames：設定 column 名稱。
+      # row.names：修改或查詢 row 名稱。
+      # rownames：設定 row 的名稱
+      # summary：顯示資料基本資訊。 
+
+data
+head(data)
+head(data,1L)
+names(data)
+names(data) <- c("n","a","g")
+names(data)
+colnames(data)
+row.names(data)
+row.names(data) <- c("r1","r2","r3")
+data
+row.names(data)
+rownames(data)
+
+summary(data)
 
 #factor
 
@@ -411,11 +468,6 @@ x <- factor(c("female","female","male","male","male","female"))
 
 x <- factor(c("female","female","male","male","male","female"),levels = c("male","female"))
 
-# data frame
-
-df <- data.frame(id=c(1,2,3,4),name=c("a","b","c","d"),gender=c(TRUE,TRUE,FALSE,FALSE))
-
-df2 <- data.frame(id=c(1,2,3,4),score=c(80,86,90,100))
 
 #date and time
 
@@ -528,6 +580,18 @@ x <- matrix(1:4,nrow=2,ncol=2)
 y <- matrix(rep(2,4),nrow=2,ncol=2)
 x*y
 x/y
+
+
+# 四, 資料匯入與輸出
+  # 1. 匯入資料
+  # 2. 輸出資料
+  # 3. 讀取資料庫的資料
+
+  # 4.1 匯入資料
+      # 透過 read.table 匯入資料。
+      # read.table 可以讀取大多數的 ASCII 資料，以下先以 CSV 檔為代表，因為是目前
+      # 最普遍見到的匯入資料格式。
+
 
 
 #lapply
