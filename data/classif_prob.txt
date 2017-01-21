@@ -1,0 +1,5 @@
+depth
+lith = lithotype
+agk = gamma ray
+ang = neutron ray
+por = porosity

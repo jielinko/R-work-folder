@@ -1,0 +1,5 @@
+GR = Gamma Ray
+NPHI = Neutron Porosity
+RHOB = Bulk Density
+RT = Formation Resistivity
+PHIE = Porosity

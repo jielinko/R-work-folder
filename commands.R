@@ -624,7 +624,118 @@ for(row in 1:row_count){
 
 write.table(fix_data[2:row_count,],file = "E:\\R-work-folder\\write_output_test.csv",sep = ",", col.names = fix_data[1,])
 
-# 將資料輸出，輸出注意一點，因為第一 row 是欄位名稱，所以記得指標要從 2 開始，指標 1 的部分要放到 col.names。
+  # 將資料輸出，輸出注意一點，因為第一 row 是欄位名稱，所以記得指標要從 2 開始，指標 1 的部分要放到 col.names。
+ 
+  # 通过 write.table 输出资料
+
+data <- iris # iris是R内建的资料
+write.table(data,file="E:\\R-work-folder\\test.CSV",sep = ",")
+
+# 五,流程控制
+
+    # 1,逻辑判断式
+    # 2,条件执行
+    # 3,循环结构
+
+  # 常見的邏輯判斷符號
+    # <> : 小于,大于
+    # <= >= : 小于等于,大于等于
+    # == !=: 等于,不等于
+    # A %in% B ：A是否在B中
+    # && ,&：交集，& 适用于向量式的逻辑判断,&&适用于单一值的逻辑判断
+    # ||,|: 聯集，| 適用狀況與 & 相同，|| 適用狀況與 && 相同。
+
+x <- 5
+y <- 10
+
+x > 3
+x >= 6
+
+x < 3 
+!(x > 3)
+
+x %in% c(1:6)
+
+x > 4 || y > 10 
+x > 4 && y > 10
+
+z = c(1,2,3)
+z > 0 & z > -1
+z > 0 && z > -1
+
+ # 条件执行
+    # if else
+    # if else if else
+    # switch
+
+x <- -1
+
+if (x > 0){
+  y <- 5
+} else {
+  y <- 10
+}
+
+if(x > 0) y <- 5 else y <- 10
+
+y <- ifelse(x>0,5,10)
+
+# switch(回傳數值代表執行第幾個程式片段, 程式片段 1, ..., 程式片段 N)
+# switch(回傳名稱代表執行哪個名稱的程式片段, 程式名稱 A 片段, ..., 程式名稱 N 片段)
+
+switch(3, 10, 3 + 5, 3 / 3)
+switch(1, 10, 3 + 5, 3 / 3)
+switch(2, 10, 3 + 5, 3 / 3)
+
+switch("first", first = 1 + 1, second = 1 + 2, third = 1 + 3)
+switch("second", first = 1 + 1, second = 1 + 2, third = 1 + 3)
+switch("third", first = 1 + 1, second = 1 + 2, third = 1 + 3)
+
+  # 循环结构
+
+    # for
+    # while
+    # repeat
+    # break
+    # next
+
+y <- 0
+for (x in c(1:10)) y <- x + y
+
+y <- 0
+for (x in c(1:10)) {
+  y <- x + y
+}
+
+x <- 1
+y <- 0
+while(x <= 10){
+  y <- x + y
+  x <- x +1
+}
+
+
+x <- 1
+y <- 0
+repeat {
+  if(x > 10) break
+  y <- x + y
+  x <- x + 1
+}
+
+x <- 1
+y <- 0
+repeat {
+  if(x>10){
+    break
+  }else if(x == 5){
+    x <- x + 1
+    next
+  }
+  
+  y <- x + y
+  x <- x + 1
+}
 
 
 
@@ -741,3 +852,68 @@ equation2 <- function(a,b,c){
 
 
 df <- read.table(file="Argentina.txt",header="True")
+
+
+
+#2017 1 20
+
+#sample1 二分类问题
+
+df <- read.csv("E:\\R-work-folder\\data\\seq_prob.csv") #读取数据
+df$t <- df$t - 1 #分类变成0和1
+
+head(df)
+len=nrow(df)
+index=sample(1:len,0.7*len) # 随机取70组数据
+
+tr_data=df[index,] # 70组训练集数据
+te_data=df[-index,] # 余下30组训练集数据
+
+require(neuralnet) # 加载神经网络训练包
+
+nn <- neuralnet(formula = t ~ X.1+X.2+X.3+X.4+X.5, data = tr_data, hidden = c(3,2),linear.output = F) # 训练
+ 
+plot(nn) # 绘图
+
+pro=compute(nn,te_data[,1:5],rep=1)$net.result #测试集来测试模型
+re=round(pro)
+cbind(te_data$t,re) # 查看测试集与实际分类的差别
+
+#sample2 三分类问题
+
+df <- read.csv("E:\\R-work-folder\\data\\classif_prob.csv") #读取数据
+head(df)
+
+lith = df$lith
+head(lith)
+newlith=factor(lith)
+lith.mat = model.matrix(~newlith-1)
+head(lith.mat)
+head(df)
+df.in = df[,colnames(df)!='lith']
+head(df.in)
+new_df = cbind(df.in,lith.mat)
+head(new_df)
+head(df)
+lith = df$lith
+head(lith)
+lith
+new_df
+
+len = nrow(new_df)
+index = sample(1:len,0.7*len)
+tr_data = new_df[index,]
+te_data = new_df[-index,]
+
+require(neuralnet)
+
+nn <- neuralnet(formula = newlith11 + newlith18 + newlith94 ~ depth + agk + ang + por,data = tr_data, hidden = c(3,2),linear.output = F)
+
+plot(nn)
+
+head(te_data)
+pro=compute(nn,te_data[,1:4],rep=1)$net.result 
+re=round(pro)
+
+cbind(te_data$newlith11,te_data$newlith18,te_data$newlith94,re) 
+
